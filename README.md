@@ -15,4 +15,8 @@ optional arguments:
   -l L        Default en-US. Denotes your location. e.g. en-US means United
               States. Put in your country code
 ```
-
+## Tip
+If you want the script to run automatically on startup you can add it to Start Up Applications, entering the following in the command field:
+```
+python3 /path/to/bing/main/py
+```
