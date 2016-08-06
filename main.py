@@ -14,14 +14,13 @@ parser.add_argument('-l', default='en-US',
                     help='Default en-US. Denotes your location. e.g. en-US means United States. Put in your country code')
 args = parser.parse_args()
 
-BingXML_URL = "http://www.bing.com/HPImageArchive.aspx?format=xml&idx={0}&n=1&mkt={1}".format(args.idx, args.mkt)
-page = urllib.request.urlopen(BingXML_URL).read()
-BingXML = BeautifulSoup(page, "lxml")
+url = "http://www.bing.com/HPImageArchive.aspx?format=xml&idx={0}&n=1&mkt={1}".format(args.i, args.l)
+page = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(page, "lxml")
 
-# For extracting complete URL of the image
-Images = BingXML.find_all('image')
-ImageURL = "https://www.bing.com" + Images[0].url.text
-ImageName = Images[0].url.text.split('/')[-1]
+images = soup.find_all('image')
+imageURL = "https://www.bing.com" + images[0].url.text
+ImageName = images[0].url.text.split('/')[-1]
 
 username = os.getenv('USER')
 path = '/home/' + username + '/Imagens/'
@@ -30,7 +29,7 @@ if not os.path.exists(path):
 
 os.chdir(path)
 if not os.path.isfile(ImageName):
-    urllib.request.urlretrieve(ImageURL, ImageName)
+    urllib.request.urlretrieve(imageURL, ImageName)
     os.system("xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace1/last-image -s " + path + ImageName)
     os.system("xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s " + path + ImageName)
     os.system('notify-send "'+'Bing Wallpaper updated successfully'+'" "'+ ImageName +'"')
