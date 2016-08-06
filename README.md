@@ -1,5 +1,9 @@
 # xfce-set-Bing-Wallpaper
 Set Bing.com Image of the day as your XFCE4 Wallpaper 
+## Requirement
+  - python3-bs4
+
+Install with : `pip3 install bs4`
 ## Usage
 ```
 $./main.py -h
