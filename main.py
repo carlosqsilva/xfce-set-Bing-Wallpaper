@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import os
-import urllib
+import urllib.request
 import argparse
 from bs4 import BeautifulSoup
 
